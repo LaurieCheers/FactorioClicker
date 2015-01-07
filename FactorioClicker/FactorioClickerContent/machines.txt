@@ -1,0 +1,626 @@
+{ "gridSize":[20,15],
+  "tooltip":{"layers":[{"texture":"square", "color":"555555", "padding":3, "draw":"stretched9grid"}]},
+  "powerSymbol":{"layers":[{"texture":"spark", "color":"FFFF00"}]},
+  "busyLight":{"layers":[{"texture":"statusLight", "color":"FFFF00"}]},
+/*  "prebuilt":[
+	{ "type":"village",
+	    "position":[10,10],
+	    "contents":[
+		{"type":"farm", "position":[0,0]},
+		{"type":"house", "position":[4,6]},
+		{"type":"house", "position":[5,6]},
+		{"type":"windmill", "position":[4,2]},
+		{"type":"bakery", "position":[6,2]},
+		{"type":"bread_export", "position":[8,3]},
+	]},
+  ],*/
+  "festivalScreen":
+  {
+	"elements":
+	[
+	  {
+	    "type":"container",
+		"position":[100,100],
+		"size":[300,300],
+		"image":{"color":"AAAAAA"},
+		"elements":
+		[
+	      {
+		    "type":"label",
+		    "text":"New Year Festival!",
+		    "position":[100,10],
+		  },
+	      {
+		    "type":"button",
+		    "text":"Ok",
+		    "position":[100,50],
+			"size":[50,50],
+			"action":"spacegrid.closeFestivalScreen()",
+		  }
+		]
+	  }
+	]
+  },
+  "stationScreen":
+  {
+	"opaque":true,
+	"elements":
+	[
+	  {
+	    "type":"grideditor",
+		"id":"grideditor",
+		"position":[100, 68],
+		"scale":32,
+		"shadowImage":{"layers":[{"texture":"white", "color":"00000055", "padding":1}]},
+		"goodStripesImage":{"layers":[{"texture":"warningStripes", "color":"00888855", "draw":"tiled"}]},
+		"badStripesImage":{"layers":[{"texture":"warningStripes", "color":"88000055", "draw":"tiled"}]},
+		"bandboxImage":{"layers":[{"texture":"selectionBox", "color":"FFFFFF", "draw":"tiled9grid"}]},
+		"background":{"layers":[{"texture":"islandbg64", "color":"FFFFFF", "draw":"tiled9grid"}]},
+		"backgroundPadding":[16,16],
+		"powerConsumedImage":{"layers":[{"texture":"gradient1", "color":"997777", "rotation":180}]},
+		"powerNeededImage":{"layers":[{"texture":"gradient1", "color":"992222", "rotation":180}]},
+		"powerGeneratedImage":{"layers":[{"texture":"gradient1", "color":"44FFFF"}]},
+		"powerStoredGainImage":{"layers":[{"texture":"gradient1", "color":"88FF88"}]},
+		"powerStoredLossImage":{"layers":[{"texture":"gradient1", "color":"FFFF88"}]},
+		"powerStoredMaxImage":{"layers":[{"texture":"gradient1", "color":"444444"}]},
+		"powerConsumedHighlightImage":{"layers":[{"texture":"bevelframe", "color":"997777", "draw":"stretched9grid"}]},
+		"powerGeneratedHighlightImage":{"layers":[{"texture":"bevelframe", "color":"44FFFF", "draw":"stretched9grid"}]},
+		"powerStoredHighlightImage":{"layers":[{"texture":"bevelframe", "color":"FFFF88", "draw":"stretched9grid"}]},
+		"palette":
+		{
+			"position":[2,2],
+			"scale":32,
+			"spacing":4,
+			"maxDisplaySize":[1,1],
+		},
+	  },
+	  {
+	    "type":"button",
+		"position":[750, 10],
+		"size":[50,40],
+		"text":"Back",
+		"action":"ui.popScreen()",
+	  },
+	  {
+		"type":"container",
+		"position":[200,0],
+		"size":[232,52],
+		"image":{"color":"AAAAAA"},
+		"elements":
+		[
+		  {"type":"button", "position":[10,10], "size":[32,32], "icon":{"texture":"white", "padding":-7}, "action":"spacegrid.restartYear()"},
+		  {"type":"button", "position":[42,10], "size":[32,32], "icon":{"texture":"pause"}, "action":"spacegrid.setTimescale(0)"},
+		  {"type":"button", "position":[74,10], "size":[32,32], "icon":{"texture":"forwardTriangle"}, "action":"spacegrid.setTimescale(1)"},
+		  {"type":"button", "position":[110,10], "size":[32,32], "icon":{"texture":"fastForward"}, "action":"spacegrid.setTimescale(10)"},
+		  {"type":"label", "position":[142,10], "width":100, "dynamicText":"spacegrid.timetext", "color":"000000"},
+		]
+	  }
+	]
+  },
+  "spaceScreen":
+  {
+	"elements":
+	[
+	  { "type":"spacegrid",
+	    "id":"spacegrid",
+		"scale":20,
+		"gridSize":[30,30],
+		"resourcesUnder":true,
+		"planets":
+		[ { "name":"Vergon 6",
+			"size":[3,3],
+			"position":[7,5],
+			"terrainType":"Land",
+			"layers":
+			[ {"texture":"planet", "color":"880000"} ]
+		  },
+		  { "name":"Saturn",
+			"size":[2,2],
+			"position":[5,10],
+			"terrainType":"Toxic",
+			"layers":
+			[ {"texture":"planet", "color":"AAAA00"},
+			  {"texture":"planetring", "color":"00BBFF"}
+			]
+		  }
+		],
+		"resources":
+		{
+		  "ironbed":[[8,5],[7,6],[8,6],[9,6],[8,7]]
+		},
+		"tools":
+		{
+		  "view":{
+		    "type":"SpaceGridTool_View",
+			"name":"View",
+			"icon":{"texture":"well", "color":"FFFFFF"},
+		    "highlight":{"texture":"selectionBox", "color":"FFFFFF", "draw":"tiled9grid"},
+		  },
+		  "village":{
+		    "type":"SpaceGridTool_Buildings",
+			"stationType":"village",
+		    "highlight":{"layers":[{"texture":"selectionCorners", "color":"FFFFFF", "draw":"tiled9grid"}]},
+		    "blocked":{"layers":[{"texture":"warningStripes", "color":"880000"}]},
+		  },
+/*		  "planetary":{
+		    "type":"SpaceGridTool_Buildings",
+			"stationType":"planetary",
+		    "highlight":{"layers":[{"texture":"selectionCorners", "color":"FFFFFF", "draw":"tiled9grid"}]},
+		    "blocked":{"layers":[{"texture":"warningStripes", "color":"880000"}]},
+		  },
+		  "floating":{
+		    "type":"SpaceGridTool_Buildings",
+			"stationType":
+			{
+			  "name":"floating",
+			  "displayName":"Floating Station",
+			  "powerGenerated":50,
+			  "layers":[{"texture":"well", "color":"4444FF"}],
+			  "contentSize":[10,10],
+			  "terrainTypes":["Sea"],
+			},
+		    "highlight":{"layers":[{"texture":"selectionCorners", "color":"FFFFFF", "draw":"tiled9grid"}]},
+		    "blocked":{"layers":[{"texture":"warningStripes", "color":"880000"}]},
+		  },
+		  "hermetic":{
+		    "type":"SpaceGridTool_Buildings",
+			"stationType":
+			{
+			  "name":"hermetic",
+			  "displayName":"Hermetic Station",
+			  "layers":[{"texture":"well", "color":"FFFFFF"}],
+			  "contentSize":[10,10],
+			  "terrainTypes":["Land","Sea","Toxic"],
+			},
+		    "highlight":{"layers":[{"texture":"selectionCorners", "color":"FFFFFF", "draw":"tiled9grid"}]},
+		    "blocked":{"layers":[{"texture":"warningStripes", "color":"880000"}]},
+		  },
+		  "orbital":{
+		    "type":"SpaceGridTool_Buildings",
+			"stationType":
+			{
+			  "name":"orbital",
+			  "displayName":"Orbital Station",
+			  "layers":[{"texture":"well", "color":"888888"}],
+			  "contentSize":[10,10],
+			  "terrainTypes":["Orbit"],
+			},
+		    "highlight":{"layers":[{"texture":"selectionCorners", "color":"FFFFFF", "draw":"tiled9grid"}]},
+		    "blocked":{"layers":[{"texture":"warningStripes", "color":"880000"}]},
+		  },
+		  "asteroid":{
+		    "type":"SpaceGridTool_Buildings",
+			"stationType":
+			{
+			  "name":"asteroid",
+			  "displayName":"Asteroid Station",
+			  "layers":[{"texture":"well", "color":"888844"}],
+			  "contentSize":[10,10],
+			  "terrainTypes":["Asteroid"],
+			},
+		    "highlight":{"layers":[{"texture":"selectionCorners", "color":"FFFFFF", "draw":"tiled9grid"}]},
+		    "blocked":{"layers":[{"texture":"warningStripes", "color":"880000"}]},
+		  },*/
+		},
+	  },
+	  {
+	    "type":"tabview",
+		"id":"storeTabs",
+		"image":{"texture":"white", "color":"AAAAAA"},
+		"padding":10,
+		"position":[664,10],
+		"size":[96,500],
+		"elements":
+		[
+		  {"type":"button", "position":[0,0], "size":[32,32], "icon":{"texture":"building"}, "action":"storeTabs.select(\"build\")", "isActivated":"storeTabs.isSelected(\"build\")"},
+		  {"type":"button", "position":[32,0], "size":[32,32], "icon":{"texture":"money"}, "action":"storeTabs.select(\"sell\")", "isActivated":"storeTabs.isSelected(\"sell\")"},
+		  {"type":"button", "position":[64,0], "size":[32,32], "icon":{"texture":"resources"}, "action":"storeTabs.select(\"buy\")", "isActivated":"storeTabs.isSelected(\"buy\")"},
+		  {"type":"button", "position":[96,0], "size":[32,32], "icon":{"texture":"science"}, "action":"storeTabs.select(\"research\")", "isActivated":"storeTabs.isSelected(\"research\")"}
+		],
+		"tabs":
+		{
+		  "build":{"type":"container", "elements":[
+			{"type":"label", "position":[10,40], "text":"Build"},
+			{"type":"toolPalette", "position":[10,60], "size":[96,440], "context":"spacegrid"},
+		  ]},
+		  "sell":{"type":"container", "elements":[
+		    {"type":"label", "position":[10,40], "text":"Sell"}
+		  ]},
+		  "buy":{"type":"container", "elements":[
+		    {"type":"label", "position":[10,40], "text":"Buy"}
+		  ]},
+		  "research":{"type":"container", "elements":[
+		    {"type":"label", "position":[10,40], "text":"Research"}
+		  ]}
+		}
+	  },
+	  {
+		"type":"container",
+		"position":[220,0],
+		"size":[200,52],
+		"image":{"color":"AAAAAA"},
+		"elements":
+		[
+		  {"type":"button", "position":[10,10], "size":[32,32], "icon":{"texture":"pause"}, "action":"spacegrid.setTimescale(0)"},
+		  {"type":"button", "position":[42,10], "size":[32,32], "icon":{"texture":"forwardTriangle"}, "action":"spacegrid.setTimescale(1)"},
+		  {"type":"button", "position":[74,10], "size":[32,32], "icon":{"texture":"fastForward"}, "action":"spacegrid.setTimescale(10)"},
+		  {"type":"label", "position":[110,10], "width":100, "dynamicText":"spacegrid.timetext", "color":"000000"},
+		]
+	  }
+	]
+  },
+  "testDialog":
+  { "elements":
+    [ { "type":"container",
+		"image":{"layers":[
+			{"texture":"shadow", "color":"555555", "padding":5, "offset":[2,2], "draw":"stretched9grid"},
+			{"texture":"white", "color":"CCEEFF"}
+		]},
+		"padding":10,
+		"position":[50,100],
+	    "elements":
+	    [ { "type":"image", "position":[0,0], "size":[32,32],"image":{"layers":[{"texture":"merchant2"}]} },
+          { "type":"label", "position":[42,0], "width":150, "text":"Hello, my name is Stan, and I like warm hugs!", "color":"000000" },
+   	    ]
+	  },
+    ]
+  },
+
+  "research":
+  [
+    {"type":"resource", "resourceType":"wheat", "amount":50, "unlockBuilding":"woodcutter"},
+    {"type":"resource", "resourceType":"wood", "amount":20, "unlockBuilding":"sawmill"}
+  ],
+
+  "settlements":
+  {
+    "village":
+	{
+	  "displayName":"Village",
+	  "layers":[{"texture":"white", "color":"22FF88"}],
+	  "contentSize":[10,10],
+	  "terrainTypes":["Land"],
+	  "prebuilt":[{"type":"allotment", "position":[4,4]}]
+	},
+	"planetary":{
+	  "displayName":"Station",
+	  "powerGenerated":50,
+	  "layers":[{"texture":"well", "color":"AA8822"}],
+	  "contentSize":[10,10],
+	  "terrainTypes":["Land"],
+	},
+  },
+
+  "buildings":
+  {
+	"farm":
+	{ "displayName":"Farm",
+	  "size":[4,4],
+	  "layers":[{"texture":"white", "color":"008800"}],
+	  "stationTypes":["village"],
+	  "processes":
+	  [ { "duration":120,
+	      "cooldown":580,
+	      "workerPositions":[[1,1]],
+		  "produces":[
+			{"type":"wheat", "amount":1, "position":[1,1]},
+			{"type":"wheat", "amount":1, "position":[1,2]},
+			{"type":"wheat", "amount":1, "position":[2,1]},
+			{"type":"wheat", "amount":1, "position":[2,2]}
+		  ],
+		}
+	  ]
+	},
+	"allotment":
+	{ "displayName":"Allotment",
+	  "size":[2,2],
+	  "layers":[{"texture":"white", "color":"885555"}],
+	  "stationTypes":["none"],
+	  "processes":
+	  [ { "cooldown":500,
+		  "produces":[{"type":"apple", "amount":1, "position":[1,1]}],
+		}
+	  ]
+	},
+	"house":
+	{ "displayName":"House",
+	  "size":[1,1],
+	  "layers":[{"texture":"house", "color":"FFFFFF"}],
+	  "stationTypes":["village"],
+	  "workers":2,
+	  "workerType":"normal",
+	  "initialWorkerFeedDuration":300,
+	  "processes":
+	  [ { "cooldown":150,
+		  "consumes":[{"subtypes":["food"], "amount":1, "position":[0,0]}],
+		  "workerFeedDuration":400,
+		}
+	  ]
+	},
+	"stable":
+	{ "displayName":"Stable",
+	  "size":[2,2],
+	  "layers":[{"texture":"house", "color":"FFFF00"}],
+	  "stationTypes":["village"],
+	  "workers":1,
+	  "workerType":"horse",
+	  "initialWorkerFeedDuration":300,
+	  "processes":
+	  [ { "cooldown":150,
+		  "consumes":[{"type":"wheat", "amount":1, "position":[0,0]}],
+		  "workerFeedDuration":400,
+		}
+	  ]
+	},
+	"woodcutter":
+	{ "displayName":"Woodcutter",
+	  "size":[2,2],
+	  "layers":[{"texture":"house", "color":"999933"}],
+	  "stationTypes":["village"],
+	  "processes":
+	  [ { "duration":80,
+	      "workerPositions":[[0,0]],
+		  "produces":[{"type":"wood", "amount":1, "position":[1,1]}],
+		}
+	  ]
+	},
+	"sawmill":
+	{ "displayName":"Sawmill",
+	  "size":[3,3],
+	  "layers":[{"texture":"house", "color":"AA5533"}],
+	  "stationTypes":["village"],
+	  "processes":
+	  [ { "duration":80,
+	      "workerPositions":[[0,0]],
+		  "consumes":[{"type":"wood", "amount":1, "position":[0,1]}],
+		  "produces":[{"type":"plank", "amount":1, "position":[1,1]}],
+		}
+	  ]
+	},
+	"windmill":
+	{ "displayName":"Windmill",
+	  "size":[2,2],
+	  "layers":[{"texture":"windmill"}],
+	  "stationTypes":["village"],
+	  "processes":
+	  [ { "duration":80,
+	      "workerPositions":[[0,0]],
+		  "consumes":[{"type":"wheat", "amount":1, "position":[0,1]}],
+		  "produces":[{"type":"flour", "amount":1, "position":[1,1]}],
+		}
+	  ]
+	},
+	"bakery":
+	{ "displayName":"Bakery",
+	  "size":[2,2],
+	  "layers":[{"texture":"house"}],
+	  "stationTypes":["village"],
+	  "processes":
+	  [ { "duration":80,
+	      "workerPositions":[[0,0]],
+		  "consumes":[{"type":"flour", "amount":1, "position":[0,1]}, {"subtypes":["fuel"], "amount":1, "position":[1,0]}],
+		  "produces":[{"type":"bread", "amount":5, "position":[1,1]}],
+		}
+	  ]
+	},
+	"bread_packing":
+	{ "displayName":"Bread Shipping",
+	  "size":[1,1],
+	  "layers":[{"texture":"white", "color":"323242"}, {"texture":"baguette", "color":"44444444"}],
+	  "stationTypes":["village"],
+	  "processes":
+	  [ { "duration":21,
+		  "consumesEachFrame":[{"type":"bread", "amount":1, "position":[0,0]}],
+		  "produces":[{"type":"bread_crate", "amount":1, "position":[0,1]}],
+		}
+	  ]
+	},
+	"bread_unpacking":
+	{ "displayName":"Bread Unpacking",
+	  "size":[1,1],
+	  "layers":[{"texture":"white", "color":"424232"}, {"texture":"baguette", "color":"44444444"}],
+	  "stationTypes":["village"],
+	  "processes":
+	  [ { "duration":21,
+	      "workerPositions":[[0,0]],
+		  "consumes":[{"type":"bread_crate", "amount":1, "position":[0,0]}],
+		  "producesEachFrame":[{"type":"bread", "amount":1, "position":[0,1]}],
+		}
+	  ]
+	},
+	"dock":
+	{ "displayName":"Dock",
+	  "size":[4,2],
+	  "layers":[{"texture":"white", "color":"826242"}],
+	  "stationTypes":["village"],
+	  "processes":
+	  [ { "duration":1,
+		  "consumes":[{"type":"input", "subtypes":["cargo"], "amount":1, "position":[0,0]}],
+		  "produces":[{"type":"input", "amount":1, "flags":["export"], "position":[0,1]}],
+		}
+	  ]
+	},
+	"shipyard":
+	{ "displayName":"Shipyard",
+	  "size":[1,1],
+	  "layers":[{"texture":"white", "color":"222282"}],
+	  "stationTypes":["village"],
+	  "mapWorkers":1,
+	  "workerType":"boat",
+	  "initialWorkerFeedDuration":400,
+	  "processes":
+	  [ { "cooldown":150,
+		  "consumes":[{"type":"input", "type":"wood", "amount":1, "position":[0,0]}],
+		  "workerFeedDuration":400,
+		}
+	  ]
+	},
+    "mine":
+	{ "displayName":"Mine",
+	  "size":[2,2],
+	  "layers":[{"texture":"white", "color":"880000"}],
+	  "stationTypes":["planetary"],
+	  "processes":
+	  [ { "duration":10,
+		  "powerCost":50,
+		  "consumes":[{"type":"coalbed", "amount":1, "flags":["mine"], "position":[0,0]}],
+		  "produces":[{"type":"coal", "amount":5, "position":[1,1]}],
+		},
+		{ "duration":10,
+		  "powerCost":50,
+		  "consumes":[{"type":"ironbed", "amount":1, "flags":["mine"], "position":[0,0]}],
+		  "produces":[{"type":"iron", "amount":5, "position":[1,1]}],
+		}
+	  ]
+	},
+	"smelter":
+	{
+	  "displayName":"Smelter",
+	  "size":[2,2],
+	  "stationTypes":["planetary"],
+	  "layers":[{"texture":"white", "color":"888800"}],
+	  "powerCost":10,
+	  "processes":
+	  [ { "duration":80,
+		  "consumes":[{"type":"iron", "amount":1, "anyPosition":[[0,0],[0,1],[1,0],[1,1]]}],
+		  "produces":[{"type":"ironplate", "amount":1, "position":[1,1]}],
+		}
+	  ]
+	},
+	"generator":
+	{ "displayName":"Power Generator",
+	  "size":[3,3],
+	  "stationTypes":["planetary"],
+	  "layers":[{"texture":"white", "color":"AACCFF"}],
+	  "processes":
+	  [ { //"duration":3,
+		  //"consumes":[{"type":"coal", "amount":1, "anyPosition":[[0,0], [1,0], [2,0], [0,1], [1,1], [2,1], [0,2], [1,2], [2,2]]}],
+		  "powerProduced":50,
+		},
+	  ]
+	},
+	"capacitor":
+	{ "displayName":"Capacitor",
+	  "size":[1,1],
+	  "stationTypes":["planetary"],
+	  "layers":[{"texture":"white", "color":"88FF88"}],
+	  "powerStore":10,
+	},
+	"energon_forge":
+	{ "displayName":"Energon Forge",
+	  "size":[3,3],
+	  "stationTypes":["planetary"],
+	  "layers":[{"texture":"white", "color":"88AA88"}],
+	  "processes":
+	  [ { "powerCost":500,
+		  "produces":[{"type":"energon", "amount":1, "position":[2,1]}],
+	    },
+	  ]
+	},
+	"office":
+	{ "displayName":"Office",
+	  "size":[1,1],
+	  "stationTypes":["planetary"],
+	  "layers":[{"texture":"white", "color":"44EEEE"}],
+	  "workers":1,
+	  "workerType":"normal",
+	},
+	"iron_market":
+	{ "displayName":"Iron Plate Market",
+	  "size":[3,3],
+	  "stationTypes":["planetary"],
+	  "layers":[{"texture":"white", "color":"888833"}],
+	  "processes":
+	  [ { "consumes":[{"type":"ironplate", "amount":1, "anyPosition":[[0,0],[1,0],[0,1],[1,1],[2,1],[1,2]]}],
+		  "income":10,
+		}
+	  ]
+	},
+	"grabber":
+	{ "displayName":"Grabber",
+	  "size":[1,1],
+	  "stationTypes":["planetary"],
+	  "duration":15,
+	  "cooldown":30,
+	  "canRotate":true,
+	  "layers":[{"texture":"white", "color":"000088"}, {"texture":"forwardTriangle", "color":"FF0000"}],
+	  "consumes":[{"type":"input", "subtypes":["solid"], "amount":1, "position":[-1,0]}],
+	  "produces":[{"type":"input", "position":[1,0]}],
+	},
+	"conveyor":
+	{ "displayName":"Conveyor",
+	  "size":[1,1],
+	  "stationTypes":["planetary"],
+	  "duration":15,
+	  "cooldown":30,
+	  "canRotate":true,
+	  "layers":[{"texture":"white", "color":"000088"}, {"texture":"forwardTriangle", "color":"00FF00"}],
+	  "consumes":[{"type":"input", "subtypes":["solid"], "amount":1, "position":[0,0]}],
+	  "produces":[{"type":"input", "position":[1,0]}],
+	},
+	"well":
+	{ "displayName":"Well",
+	  "size":[1,1],
+	  "stationTypes":["planetary"],
+	  "layers":[{"texture":"well", "color":"FFFFFF"}],
+	  "processes":
+	  [ { "duration":10,
+		  "produces":[{"type":"water", "amount":1, "position":[0,0]}],
+		}
+	  ]
+	},
+	"pipe":
+	{ "displayName":"Pipe",
+	  "size":[1,1],
+	  "stationTypes":["planetary"],
+	  "layers":[{"texture":"pipe", "color":"FFFFFF"}],
+	  "processes":
+	  [ { "cooldown":2,
+		  "consumes":[{"type":"water", "amount":1, "flags":["equalize"], "anyPosition":[[-1,0], [0,0], [1,0], [0,1], [0,-1]]}],
+		  "produces":[{"type":"water", "amount":1, "position":[0,0]}],
+		},
+	  ]
+	},
+	"outflow":
+	{ "displayName":"Outflow",
+	  "size":[1,1],
+	  "stationTypes":["planetary"],
+	  "layers":[{"texture":"well", "color":"00FF00"}],
+	  "processes":
+	  [ { "cooldown":5,
+		  "consumes":[{"type":"water", "amount":1, "anyPosition":[[-1,0], [1,0], [0,-1], [0,1], [0,0]]}],
+		}
+	  ]
+	},
+  },
+
+  "resources":
+  {
+	"apple":{"name":"Apple", "subtypes":["food"], "maxAmount":100, "image":{"layers":[{"texture":"apple"}]}},
+	"wheat":{"name":"Wheat", "subtypes":["food"], "maxAmount":100, "image":{"layers":[{"texture":"wheat"}]}},
+	"bread":{"name":"Bread", "subtypes":["food"], "maxAmount":100, "image":{"layers":[{"texture":"baguette"}]}},
+	"bread_crate":{"name":"Bread Crate", "subtypes":["cargo"], "maxAmount":100, "image":{"layers":[{"texture":"crate"}, {"texture":"baguette", "padding":-6}]}},
+
+	"flour":{"name":"Flour", "maxAmount":100, "image":{"layers":[{"texture":"powder"}]}},
+
+	"wood":{"name":"Wood", "subtypes":["fuel"], "maxAmount":100, "image":{"layers":[{"texture":"wood"}]}},
+	"plank":{"name":"Plank", "maxAmount":100, "image":{"layers":[{"texture":"plank"}]}},
+
+	"coalbed":{"name":"Coal Bed", "maxAmount":10000, "image":{"layers":[{"texture":"white", "color":"111111", "padding":0}]}},
+	"ironbed":{"name":"Iron Bed", "maxAmount":10000, "image":{"layers":[{"texture":"white", "color":"668888", "padding":0}]}},
+	"ocean":{"name":"Ocean", "image":{"layers":[{"texture":"white", "color":"000088", "padding":0}]}},
+
+	"coal":{"name":"Coal", "maxAmount":10, "subtypes":["solid","fuel"], "image":{"layers":[{"texture":"white", "color":"111111", "padding":-8}]}},
+	"iron":{"name":"Iron", "maxAmount":10, "subtypes":["solid"], "image":{"layers":[{"texture":"white", "color":"668888", "padding":-8}]}},
+	"ironplate":{"name":"Iron Plate", "maxAmount":10, "subtypes":["solid"], "image":{"layers":[{"texture":"white", "color":"557777", "padding":-6}]}},
+	"water":{"name":"Water", "subtypes":["liquid"], "image":{"layers":[{"texture":"white", "color":"6666AA", "padding":-8}]}},
+	"energon":{"name":"Energon", "maxAmount":1, "subtypes":["solid","fuel"], "image":{"layers":[{"texture":"white", "color":"22FF22", "padding":-8}]}},
+  },
+
+  "workers":
+  {
+	"normal":{"image":{"layers":[{"texture":"worker"}]}, "starvingImage":{"layers":[{"texture":"redworker"}]}, "moveSpeed":0.05},
+	"horse":{"image":{"layers":[{"texture":"horse"}]}, "starvingImage":{"layers":[{"texture":"redhorse"}]}, "moveSpeed":0.1, "canOperate":false},
+	"boat":{"image":{"layers":[{"texture":"boat"}]}, "starvingImage":{"layers":[{"texture":"redboat"}]}, "moveSpeed":0.05, "canOperate":false},
+  }
+}
